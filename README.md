@@ -1,6 +1,6 @@
 # 🦀 Harbugotchi
 
-En lille manga-krabbe (tamagotchi) der kører i browseren – bygget til telefonen.
+En lille pixel-art krabbe (tamagotchi) der kører i browseren – bygget til telefonen. 8-bit stil: PICO-8-palet, pixelfont (Press Start 2P, OFL) og sprites tegnet som tekst-gitter i `sprites.js`.
 
 ## Kør den
 Ingen build. Server mappen statisk og åbn på telefonen:

@@ -3,121 +3,97 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
-<meta name="theme-color" content="#5fd4ff">
+<meta name="theme-color" content="#1d2b53">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Harbugotchi">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <title>Harbugotchi</title>
 <link rel="manifest" href="manifest.webmanifest">
-<link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+<link rel="icon" href="icons/icon-192.png" type="image/png">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <main id="app">
   <header>
-    <div id="title"><b id="nameLabel">Harbugotchi</b><small id="stageLabel"></small></div>
-    <button id="soundBtn" class="icon-btn" aria-label="Lyd til/fra">🔊</button>
+    <div id="title"><b id="nameLabel">HARBUGOTCHI</b><small id="stageLabel"></small></div>
+    <button id="soundBtn" class="icon-btn" aria-label="Lyd til/fra">ON</button>
   </header>
 
   <section id="stats" aria-label="Status">
-    <div class="stat" data-k="hunger"><span>🍤</span><i><b></b></i></div>
-    <div class="stat" data-k="happy"><span>💖</span><i><b></b></i></div>
-    <div class="stat" data-k="energy"><span>⚡</span><i><b></b></i></div>
-    <div class="stat" data-k="clean"><span>🫧</span><i><b></b></i></div>
+    <div class="stat" data-k="hunger"><i data-ic="fish" data-s="2"></i><div class="bar"></div></div>
+    <div class="stat" data-k="happy"><i data-ic="heart" data-s="2"></i><div class="bar"></div></div>
+    <div class="stat" data-k="energy"><i data-ic="bolt" data-s="2"></i><div class="bar"></div></div>
+    <div class="stat" data-k="clean"><i data-ic="bubbles" data-s="2"></i><div class="bar"></div></div>
   </section>
 
   <section id="scene">
-    <div class="rays"></div>
+    <canvas id="bgCv" class="px"></canvas>
     <div id="bubbles"></div>
-    <svg class="decor" viewBox="0 0 400 120" preserveAspectRatio="none" aria-hidden="true">
-      <path d="M0,60 Q100,30 200,55 T400,45 L400,120 L0,120Z" fill="#ffe9a8"/>
-      <path d="M0,85 Q120,65 220,82 T400,75 L400,120 L0,120Z" fill="#ffd77a"/>
-    </svg>
-    <svg class="weed w1" viewBox="0 0 40 120" aria-hidden="true"><path d="M20,120 C0,90 40,70 18,40 C8,25 22,10 20,0" stroke="#3ddc97" stroke-width="9" fill="none" stroke-linecap="round"/></svg>
-    <svg class="weed w2" viewBox="0 0 40 120" aria-hidden="true"><path d="M20,120 C40,90 0,70 22,40 C32,25 18,10 20,0" stroke="#b8f26b" stroke-width="8" fill="none" stroke-linecap="round"/></svg>
-    <svg class="weed w3" viewBox="0 0 40 120" aria-hidden="true"><path d="M20,120 C5,95 35,75 20,45" stroke="#ff9ec7" stroke-width="7" fill="none" stroke-linecap="round"/></svg>
-    <div class="star-fish" aria-hidden="true">⭐</div>
-    <div class="shell" aria-hidden="true">🐚</div>
-
     <div id="poops"></div>
 
     <div id="crabWrap" data-stage="egg">
       <div id="crabSlide">
-        <div id="crabScale">
-          <div id="alert" hidden>❗</div>
-          <div id="statusIcon"></div>
-          <svg id="eggSvg" viewBox="0 0 200 210" aria-label="Æg">
-            <defs>
-              <radialGradient id="eggG" cx="38%" cy="30%" r="80%">
-                <stop offset="0" stop-color="#fffbe6"/><stop offset=".55" stop-color="#ffe9f3"/><stop offset="1" stop-color="#c9f3ff"/>
-              </radialGradient>
-            </defs>
-            <ellipse cx="100" cy="196" rx="52" ry="9" fill="#000" opacity=".12"/>
-            <path d="M100,20 C142,20 166,82 166,128 C166,168 136,190 100,190 C64,190 34,168 34,128 C34,82 58,20 100,20Z" fill="url(#eggG)" stroke="#ff7fb0" stroke-width="4"/>
-            <circle cx="72" cy="80" r="9" fill="#ff9ec7"/><circle cx="128" cy="100" r="12" fill="#8fe3ff"/>
-            <circle cx="90" cy="140" r="10" fill="#ffd93d"/><circle cx="130" cy="150" r="7" fill="#b69cff"/>
-            <circle cx="62" cy="130" r="6" fill="#6df2c4"/>
-            <ellipse cx="78" cy="58" rx="12" ry="22" fill="#fff" opacity=".6" transform="rotate(20 78 58)"/>
-            <path id="crack" d="M70,100 L88,92 L98,106 L116,94 L130,108" stroke="#7a4b6e" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-          <svg id="crabSvg" viewBox="0 0 240 210" aria-label="Krabbe"></svg>
+        <div id="crabBox">
+          <div id="alert" hidden></div>
+          <canvas id="crabCv" class="px" aria-label="Krabbe"></canvas>
         </div>
       </div>
     </div>
 
     <div id="say" role="status"></div>
     <div id="fx"></div>
-    <div id="night" aria-hidden="true"><span class="moon">🌙</span><span class="zzz">z</span><span class="zzz z2">Z</span><span class="zzz z3">z</span></div>
+    <div id="night" aria-hidden="true"><i class="moon" data-ic="moon" data-s="5"></i><i class="zzz" data-ic="zed" data-s="4"></i><i class="zzz z2" data-ic="zed" data-s="6"></i><i class="zzz z3" data-ic="zed" data-s="3"></i></div>
     <div id="flash"></div>
   </section>
 
   <nav id="actions">
-    <button data-act="feed"><span>🍤</span>Mad</button>
-    <button data-act="cuddle"><span>🤗</span>Kæl</button>
-    <button data-act="play"><span>🎈</span>Leg</button>
-    <button data-act="sleep" id="sleepBtn"><span>🌙</span>Sov</button>
-    <button data-act="scold"><span>😠</span>Straf</button>
-    <button data-act="clean"><span>🫧</span>Vask</button>
-    <button data-act="medicine"><span>💊</span>Medicin</button>
-    <button data-act="info"><span>📋</span>Info</button>
+    <button data-act="feed"><i data-ic="fish"></i>MAD</button>
+    <button data-act="cuddle"><i data-ic="heart"></i>KÆL</button>
+    <button data-act="play"><i data-ic="balloon"></i>LEG</button>
+    <button data-act="sleep" id="sleepBtn"><i data-ic="moon"></i><span>SOV</span></button>
+    <button data-act="scold"><i data-ic="bang"></i>STRAF</button>
+    <button data-act="clean"><i data-ic="bubbles"></i>VASK</button>
+    <button data-act="medicine"><i data-ic="pill"></i>PILLE</button>
+    <button data-act="info"><i data-ic="info"></i>INFO</button>
   </nav>
 
   <div class="sheet" id="foodSheet" hidden>
     <div class="card">
-      <h2>Hvad skal den have?</h2>
+      <h2>HVAD SKAL DEN HAVE?</h2>
       <div class="choices">
-        <button data-food="meal"><span>🍤</span>Rejemad<small>mætter</small></button>
-        <button data-food="snack"><span>🍬</span>Slik<small>sjovt, men usundt</small></button>
+        <button data-food="meal"><i data-ic="fish" data-s="5"></i>FISK<small>mætter</small></button>
+        <button data-food="snack"><i data-ic="candy" data-s="5"></i>SLIK<small>usundt</small></button>
       </div>
-      <button class="ghost" data-close>Luk</button>
+      <button class="ghost" data-close>LUK</button>
     </div>
   </div>
 
   <div class="sheet" id="infoSheet" hidden>
     <div class="card">
-      <h2 id="infoTitle">Info</h2>
+      <h2 id="infoTitle">INFO</h2>
       <dl id="infoList"></dl>
-      <button class="ghost danger" id="resetBtn">Start forfra</button>
-      <button class="ghost" data-close>Luk</button>
+      <button class="ghost danger" id="resetBtn">START FORFRA</button>
+      <button class="ghost" data-close>LUK</button>
     </div>
   </div>
 
   <div class="sheet" id="nameSheet" hidden>
     <form class="card" id="nameForm">
-      <h2>🎉 Den klækkes!</h2>
-      <p>Hvad skal din lille krabbe hedde?</p>
-      <input id="nameInput" maxlength="12" placeholder="Krabbi" autocomplete="off">
-      <button type="submit" class="primary">Giv navn 💖</button>
+      <h2>DEN KLÆKKES!</h2>
+      <p>Hvad skal din krabbe hedde?</p>
+      <input id="nameInput" maxlength="10" placeholder="KRABBI" autocomplete="off">
+      <button type="submit" class="primary">GIV NAVN</button>
     </form>
   </div>
 
   <div id="game" hidden>
-    <div id="gameBar"><span>🎈 Fang bobler! Undgå vandmænd</span><b id="gameScore">0</b><b id="gameTime">15</b></div>
+    <div id="gameBar"><span>FANG BOBLER!</span><b id="gameScore">0</b><b id="gameTime">15</b></div>
     <div id="gameField"></div>
   </div>
 </main>
+<script src="sprites.js"></script>
 <script src="game.js"></script>
 </body>
 </html>
