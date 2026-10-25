@@ -1,17 +1,25 @@
 {
   "name": "Harbugotchi",
   "short_name": "Harbugotchi",
-  "description": "En lille manga-krabbe du skal passe på",
+  "description": "En lille pixel-krabbe du skal passe på",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#d9f4ff",
-  "theme_color": "#5fd4ff",
+  "background_color": "#1d2b53",
+  "theme_color": "#1d2b53",
   "lang": "da",
   "icons": [
-    { "src": "icons/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
-    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
-    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
   ]
 }
